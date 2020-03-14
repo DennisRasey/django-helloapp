@@ -1,0 +1,16 @@
+name: OS Tests
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  test-os:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Tests
+      run: |
+        ls -la /
+        ls /etc
