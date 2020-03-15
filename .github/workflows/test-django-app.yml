@@ -3,8 +3,6 @@ name: Django CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
@@ -26,6 +24,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Run Tests
+    - name: Run manage test
       run: |
         python manage.py test
+    - name: run flake test
+      run: |
+        flake8 . --conf=setup.cfg
+
