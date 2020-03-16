@@ -6,7 +6,7 @@ on:
 
 jobs:
 
-  login:
+  get_it:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -17,14 +17,6 @@ jobs:
     - name: pull image
       run: docker pull docker.pkg.github.com/dennisrasey/django-helloapp/django-helloapp:latest
 
-
-
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
     - name: test stuff
       uses: ./.github/actions/python_tests
     
