@@ -31,7 +31,7 @@ jobs:
       - name: Push image
         run: |
           # stupid hack because Github registry requires all lowercase 
-          IMAGE_ID=$( echo "${{ github.repository }}/$IMAGE_NAME" | tr '[:upper:]' '[:lower:]')
+          IMAGE_ID=docker.pkg.github.com/$( echo "${{ github.repository }}/$IMAGE_NAME" | tr '[:upper:]' '[:lower:]')
 
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
@@ -46,5 +46,5 @@ jobs:
           echo VERSION=$VERSION
 
           docker tag image $IMAGE_ID:$VERSION
-          docker push docker.pkg.github.com/$IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
 
