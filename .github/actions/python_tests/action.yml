@@ -4,4 +4,4 @@ runs:
   using: docker
   image: docker.pkg.github.com/dennisrasey/django-helloapp/django-helloapp:latest
   args:
-   - manage.py test
+   - /code/manage.py test
