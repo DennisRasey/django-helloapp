@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-      - dockerfile
-#      - no-tests
 
     # Publish `v1.2.3` tags as releases.
     tags:
