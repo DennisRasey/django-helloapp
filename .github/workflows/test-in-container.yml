@@ -9,7 +9,7 @@ jobs:
 
     runs-on: ubuntu-latest
     container:
-      image: django:1.9.6
+      image: python:3.5.9
 
     strategy:
       max-parallel: 4
