@@ -1,4 +1,4 @@
-FROM django:1.9.6
+FROM python:3.5.9
 
 ADD setup.cfg /setup.cfg
 ADD requirements.txt /requirements.txt
