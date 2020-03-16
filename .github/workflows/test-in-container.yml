@@ -29,8 +29,8 @@ jobs:
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
     - name: pull image
-      run: docker pull python:3.5.9
-      #run: docker pull docker.pkg.github.com/dennisrasey/django-helloapp/django-helloapp:dockerfile
+      #run: docker pull python:3.5.9
+      run: docker pull docker.pkg.github.com/dennisrasey/django-helloapp/django-helloapp:latest
 
     - name: start image
       run: |
