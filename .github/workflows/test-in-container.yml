@@ -9,7 +9,7 @@ jobs:
 
     runs-on: ubuntu-latest
     container:
-#      image: docker.pkg.github.com/dennisrasey/django-helloapp/django-helloapp:latest
+      image: docker.pkg.github.com/dennisrasey/django-helloapp/django-helloapp:latest
 
     strategy:
       max-parallel: 4
@@ -25,19 +25,17 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: login to Github registry
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+#    - name: login to Github registry
+#      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
-    - name: pull image
+#    - name: pull image
 #      #run: docker pull python:3.5.9
-      run: docker pull docker.pkg.github.com/dennisrasey/django-helloapp/django-helloapp:latest
+#      run: docker pull docker.pkg.github.com/dennisrasey/django-helloapp/django-helloapp:latest
 
-    - name: start image
+    - name: check  image
       run: |
-        docker run -d --name django-helloapp -v $PWD/:/code python:3.5.9
-        docker exec -it django-helloapp ls -la /code
-        docker exec -it django-helloapp pip install -r /code/requirements.txt
-        docker exec -it django-helloapp pip list
+        ls -la /
+        echo $GITHUB_WORKSPACE
 
 
 #    - name: Install Dependencies
