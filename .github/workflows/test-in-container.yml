@@ -33,7 +33,7 @@ jobs:
       #run: docker pull docker.pkg.github.com/dennisrasey/django-helloapp/django-helloapp:dockerfile
 
     - name: start image
-      run: docker run --name django-helloapp -v $PWD/:/ python:3.5.9 bash
+      run: docker run --name django-helloapp -v $PWD/:/code python:3.5.9 bash
 
     - name: look around
       run: ls -la /
