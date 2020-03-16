@@ -1,0 +1,31 @@
+name: Testing Actions in Docker
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  login:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: login to Github registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+    - name: pull image
+      run: docker pull docker.pkg.github.com/dennisrasey/django-helloapp/django-helloapp:latest
+
+
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: test stuff
+      uses: ./.github/actions/python_tests
+    
+

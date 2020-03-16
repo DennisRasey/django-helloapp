@@ -1,15 +1,17 @@
 FROM python:3.5.9
 
-ADD setup.cfg /setup.cfg
-ADD requirements.txt /requirements.txt
-ADD manage.py /manage.py
+RUN mkdir /code
+ADD setup.cfg /code/setup.cfg
+ADD requirements.txt /code/requirements.txt
+ADD manage.py /code/manage.py
 
+ADD howdy /code/howdy
+ADD helloapp /code/helloapp
 
-ADD howdy /howdy
-ADD helloapp /helloapp
+WORKDIR /code
 
-RUN pip install --no-cache-dir -r /requirements.txt
-RUN python3 ./manage.py migrate
+RUN pip install --no-cache-dir -r requirements.txt
+RUN python3 manage.py migrate
 
 
 
