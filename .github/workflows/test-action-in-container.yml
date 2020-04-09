@@ -17,6 +17,9 @@ jobs:
     - name: pull image
       run: docker pull docker.pkg.github.com/dennisrasey/django-helloapp/django-helloapp:latest
 
+    - name: ls
+      run: ls -la / ; ls -la /code
+
     - name: test stuff
       uses: ./.github/actions/python_tests
     
