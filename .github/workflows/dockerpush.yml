@@ -49,6 +49,5 @@ jobs:
           docker tag image $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
 
-      - name: Test Image
-        run: |
           docker run $IMAGE_ID:$VERSION python3 ./manage.py test
+
