@@ -9,7 +9,7 @@ jobs:
 
     runs-on: ubuntu-latest
     container:
-      image: python:3.5.9
+      image: docker.pkg.github.com/dennisrasey/django-helloapp/django-helloapp
 
     strategy:
       max-parallel: 4
