@@ -2,7 +2,7 @@ name: Django CI Testing
 
 on:
   push:
-    branches: [ master ]
+    branches: [ dockerfile ]
 
 jobs:
   build:
