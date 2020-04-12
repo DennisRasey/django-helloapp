@@ -35,6 +35,8 @@ jobs:
 
       - name: Push image
         run: |
+          IMAGE_NAME=$( echo "${{ github.repository }}/" | tr '[:upper:]' '[:lower:]' | awk -F "/" '{print $2}')
+
           # stupid hack because Github registry requires all lowercase 
           IMAGE_ID=docker.pkg.github.com/$( echo "${{ github.repository }}/$IMAGE_NAME" | tr '[:upper:]' '[:lower:]')
 
