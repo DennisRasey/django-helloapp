@@ -27,8 +27,9 @@ jobs:
 
       - name: Build image
         run: |
-          IMAGE_NAME=$( echo "${{ github.repository }}/" | tr '[:upper:]' '[:lower:]' | awk -F "/" '{print $2}')
-          docker build . --file Dockerfile --tag $IMAGE_NAME --pull
+#          IMAGE_NAME=$( echo "${{ github.repository }}/" | tr '[:upper:]' '[:lower:]' | awk -F "/" '{print $2}')
+          #docker build . --file Dockerfile --tag $IMAGE_NAME --pull
+          docker build . --file Dockerfile --tag image --pull
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
