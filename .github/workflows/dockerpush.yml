@@ -27,7 +27,7 @@ jobs:
 
       - name: Build image
         run: |
-#          IMAGE_NAME=$( echo "${{ github.repository }}/" | tr '[:upper:]' '[:lower:]' | awk -F "/" '{print $2}')
+          #IMAGE_NAME=$( echo "${{ github.repository }}/" | tr '[:upper:]' '[:lower:]' | awk -F "/" '{print $2}')
           #docker build . --file Dockerfile --tag $IMAGE_NAME --pull
           docker build . --file Dockerfile --tag image --pull
 
