@@ -11,9 +11,9 @@ on:
     tags:
       - v*
 
-env:
+#env:
   # TODO: Change variable to your image's name.
-  IMAGE_NAME: django-helloapp
+#  IMAGE_NAME: django-helloapp
 
 jobs:
   push:
@@ -24,7 +24,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build image
-        run: docker build . --file Dockerfile --tag image --pull
+        run: |
+          IMAGE_NAME=$( echo "${{ github.repository }}/" | tr '[:upper:]' '[:lower:]' | awk -F "/" '{print $2}')
+          docker build . --file Dockerfile --tag $IMAGE_NAME --pull
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
