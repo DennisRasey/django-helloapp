@@ -11,34 +11,32 @@ on:
     tags:
       - v*
 
-env:
+#env:
   # TODO: Change variable to your image's name.
-#  IMAGE_NAME: django-helloapp
-  IMAGE_NAME:  $( echo "${{ github.repository }}/" | tr '[:upper:]' '[:lower:]' | awk -F "/" '{print $2}')
+  #IMAGE_NAME: django-helloapp
 
 
 jobs:
-  push:
+  test-push:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build image
-        run: |
-          #IMAGE_NAME=$( echo "${{ github.repository }}/" | tr '[:upper:]' '[:lower:]' | awk -F "/" '{print $2}')
-          #docker build . --file Dockerfile --tag $IMAGE_NAME --pull
-          docker build . --file Dockerfile --tag image --pull
-
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
+      - name: Build image
+        run: |
+          docker build . --file Dockerfile --tag image --pull
+
       - name: Push image
         run: |
+          # set image name from repo name
           IMAGE_NAME=$( echo "${{ github.repository }}/" | tr '[:upper:]' '[:lower:]' | awk -F "/" '{print $2}')
 
-          # stupid hack because Github registry requires all lowercase 
+          # stupid hack because Github registry requires all lowercase, but our repo is mixed case 
           IMAGE_ID=docker.pkg.github.com/$( echo "${{ github.repository }}/$IMAGE_NAME" | tr '[:upper:]' '[:lower:]')
 
           # Strip git ref prefix from version
@@ -53,8 +51,10 @@ jobs:
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
 
+          # run some tests beore pushing new image
+          docker run $IMAGE_ID:$VERSION python3 ./manage.py test
+
           docker tag image $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
 
-          docker run $IMAGE_ID:$VERSION python3 ./manage.py test
 
