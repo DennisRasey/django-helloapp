@@ -1,7 +1,0 @@
-name: 'python tests'
-
-runs:
-  using: docker
-  image: docker.pkg.github.com/dennisrasey/django-helloapp/django-helloapp:latest
-  args:
-   - /code/manage.py test
